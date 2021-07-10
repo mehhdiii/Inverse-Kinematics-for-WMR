@@ -1,0 +1,18 @@
+% Differential drive WMR
+
+T = 0.05; %Sampling time
+W = 1/2; %m. Width of Robot
+r = 1/4; %m. Radius of tires
+
+% Create Trajectory for WMR:
+N=100;t=linspace(-2*pi,2*pi,N);
+f1=1;x=5*sin(f1*t);f2=2;y=5*sin(f2*t);
+phi = tan2(y./x);
+plot(x,y,'linewidth',2);
+
+for n = 1:N-1
+    
+    mu = 1/2 * ( sin(phi(n)) * (y(n+1) - y(n)) + cos(phi(n)*(x(n+1)-x(n)) )/(cos(phi(n))*(y(n+1)-y(n))-sin(phi(n))*(x(n+1)-x(n))); 
+end
+
+
