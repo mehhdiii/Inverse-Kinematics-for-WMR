@@ -10,8 +10,9 @@ f1=1;x=5*sin(f1*t);f2=2;y=5*sin(f2*t);
 phi = tan(y./x);
 %initialize resulting velocities
 omega = zeros(1, N); v = zeros(1, N); 
-plot(x,y,'linewidth',2);
 
+%initialize resulting forward kinematic variables: 
+x_f = zeros(1, N); y_f = zeros(1, N); phi_f = zeros(1, N); 
 for n = 1:N-1
     
     %calculating inverse kinematics variables: 
@@ -25,11 +26,30 @@ for n = 1:N-1
     omega(n) = del_phi/T; 
     v(n) = R_n*omega(n);  
     
-    
+    %forward Kinematics: circular velocity motion model
+    if (n>1)
+        
+        
+        x_f(n) = x_f(n-1) + (v(n)/omega(n)) * (-sin(phi_f(n-1))+sin(phi_f(n-1)+omega(n)*T)); 
+        y_f(n) = y_f(n-1) + (v(n)/omega(n)) * (cos(phi_f(n-1))-cos(phi_f(n-1)+omega(n)*T)); 
+        phi_f(n) = phi_f(n-1) + omega(n)*T; 
+        
+    end
+   
 end
+
 figure()
 hold on 
 plot(t,omega,'linewidth',2);
 plot(t, v,'linewidth',2)
 legend('Angular Velocity', 'Linear velocity')
 hold off
+
+figure()
+hold on 
+plot(x,y,'linewidth',2); 
+plot(x_f, y_f, 'linewidth', 2); 
+legend('Original Path', 'Calculated Path')
+hold off
+
+print -deps OutputFig
