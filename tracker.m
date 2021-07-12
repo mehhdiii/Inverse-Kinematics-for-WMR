@@ -43,8 +43,10 @@ for n = 2:N-1
     %resulting Inv-Kinematics velocities: 
     omega(n) = del_phi/T; 
     v(n) = R_n*abs(omega(n));  
-    vL = (R_n-1/2 *W)*omega(n); 
-    vR = (R_n+1/2 *W)*omega(n); 
+    vL(n) = (R_n-1/2 *W)*omega(n); 
+    vR(n) = (R_n+1/2 *W)*omega(n); 
+    omegaL(n) = vL(n)/r; 
+    omegaR(n) = vR(n)/r; 
     
     %forward Kinematics: circular velocity motion model/Exact integration
     %model 
