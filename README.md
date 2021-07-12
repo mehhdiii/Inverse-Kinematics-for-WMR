@@ -1,3 +1,3 @@
 # Inverse Kinematics for Differential Drive Wheeled Mobile Robot
-## Simulation 
+## Simulation results 
 ![Tracking](figures/output.gif)
