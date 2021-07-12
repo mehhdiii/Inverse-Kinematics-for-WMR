@@ -18,7 +18,7 @@ x_f = zeros(1, N); y_f = zeros(1, N); phi_f = zeros(1, N);
 
 %plotting initializations: 
 axis tight manual % this ensures that getframe() returns a consistent size
-filename = 'testAnimated.gif';
+filename = 'figures/testAnimated.gif';
 h = figure; 
 
 for n = 2:N-1
@@ -60,8 +60,11 @@ for n = 2:N-1
     
 
 %     figure(1);clf;
-    plot(x_f(1:n), y_f(1:n), 'm-', 'linewidth', 6); 
-    hold on; plot(x, y, 'k-', 'linewidth', 1); drawnow;  
+    plot(x_f(1:n), y_f(1:n), 'g-', 'linewidth', 6); 
+    axis([-9  9 -9  9])
+    hold on; plot(x, y, 'k-', 'linewidth', 1); 
+    legend('Calculated path', 'Desired path')
+    drawnow;  
     
     %create GIF
     frame = getframe(h); 
@@ -76,17 +79,25 @@ for n = 2:N-1
 end
 
 figure()
-hold on 
+
+subplot 211
 plot(t,omega,'linewidth',2);
+title('Angular Velocity')
+xlabel("t")
+ylabel('\omega')
+subplot 212
 plot(t, v,'linewidth',2)
-legend('Angular Velocity', 'Linear velocity')
-hold off
+
+title('Linear velocity')
+xlabel("t")
+ylabel("v")
+
 
 figure()
 hold on 
 plot(x,y,'linewidth',2); 
-plot(x_f, y_f, 'linewidth', 6); 
+p_lot(xf, y_f, 'linewidth', 6); 
 legend('Original Path', 'Calculated Path')
 hold off
 
-print -deps OutputFig
+print -deps figures/OutputFig
