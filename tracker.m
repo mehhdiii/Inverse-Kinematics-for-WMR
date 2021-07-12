@@ -46,20 +46,15 @@ for n = 2:N-1
     vL = (R_n-1/2 *W)*omega(n); 
     vR = (R_n+1/2 *W)*omega(n); 
     
-    %forward Kinematics: circular velocity motion model
+    %forward Kinematics: circular velocity motion model/Exact integration
+    %model 
     x_f(n+1) = x_f(n) + (v(n)/omega(n))*(-sin(phi(n))+sin(phi(n)+omega(n)*T));
     y_f(n+1) = y_f(n) + (v(n)/omega(n))*(cos(phi(n))-cos(phi(n)+omega(n)*T));
     
-    
-        
-        
-%     x_f(n) = x_f(n-1) + abs(v(n)/omega(n)) * (-sin(phi(n-1))+sin(phi(n-1)+omega(n)*T)); 
-%     y_f(n) = y_f(n-1) + abs(v(n)/omega(n)) * (cos(phi(n-1))-cos(phi(n-1)+omega(n)*T)); 
-%         phi_f(n) = phi_f(n-1) + omega(n)*T; 
-        
-    
+    %Alternately: Model obtained from trapezoidal integration: 
+    % x_f(n+1) = x_f(n) + (v(n)*T/2)*(cos(phi_n)+cos(phi_n+omega(n)*T));
+    % y_f(n+1) = y_f(n) + (v(n)*T/2)*(sin(phi_n)+sin(phi_n+omega(n)*T));
 
-%     figure(1);clf;
     plot(x_f(1:n), y_f(1:n), 'g-', 'linewidth', 6); 
     axis([-9  9 -9  9])
     hold on; plot(x, y, 'k-', 'linewidth', 1); 
