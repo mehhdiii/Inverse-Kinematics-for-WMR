@@ -95,9 +95,10 @@ ylabel("v")
 
 figure()
 hold on 
-plot(x,y,'linewidth',2); 
-p_lot(xf, y_f, 'linewidth', 6); 
-legend('Original Path', 'Calculated Path')
+ 
+plot(x_f, y_f, 'linewidth', 6); 
+plot(x,y,'linewidth',2);
+legend('Calculated Path', 'Original Path')
 hold off
 
 print -deps figures/OutputFig
