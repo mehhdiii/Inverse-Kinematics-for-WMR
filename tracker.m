@@ -12,6 +12,7 @@ phi =zeros(1, N);
 %initialize Inverse kinematics velocities
 omega = zeros(1, N); v = zeros(1, N); 
 vL = zeros(1, N); vR = zeros(1, N); 
+omegaL = zeros(1, N); omegaR = zeros(1, N); 
 
 %initialize resulting forward kinematic variables: 
 x_f = zeros(1, N); y_f = zeros(1, N); phi_f = zeros(1, N); 
@@ -22,10 +23,9 @@ filename = 'figures/testAnimated.gif';
 h = figure; 
 
 for n = 2:N-1
-    if n>1
-        phi(n) = atan2(y(n)-y(n-1), x(n)-x(n-1)); 
-    end
     
+    phi(n) = atan2(y(n)-y(n-1), x(n)-x(n-1)); 
+
     %calculating inverse kinematics variables: 
     mu = 1/2*(sin(phi(n))*(y(n+1)-y(n))+cos(phi(n)*(x(n+1)-x(n))))...
         /(cos(phi(n))*(y(n+1)-y(n))-sin(phi(n))*(x(n+1)-x(n))); 
